@@ -85,21 +85,7 @@ class PydanticAgent(Generic[T]):
 
             validated = self.output_model.model_validate(parsed)
 
-            # Write to ai_chat_history.txt
-            timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            with open("ai_chat_history.txt", "a", encoding="utf-8") as f:
-                f.write(f"\n\n [{self.agent_name}Agent] - {timestamp}\n")
-                f.write("User Input:\n")
-                f.write(str(input_data) + "\n\n")
-                f.write("Model Output:\n")
-                f.write(json.dumps(parsed, indent=2) + "\n\n")
-
-                if "reasoning" in parsed:
-                    f.write("Reasoning:\n")
-                    f.write(parsed["reasoning"] + "\n\n")
-
-                f.write(f"Routing Decision: {routing_decision}\n")
-                f.write("-" * 50 + "\n")
+            # Đã loại bỏ ghi file ai_chat_history.txt
 
             return validated
 
